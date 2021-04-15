@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Markdown 语法以及数学表达式总结笔记 - DataSci/&gt;</title><meta description="markdown 是一个轻量级标记语言[^1]，它的名称是为了对应 HTML 中的 Markup 对应的语言，提供了简介快速的语法来实现 Markup 的功能。因此 markdown 兼容了 HTML 的标签，此外还可以直接用任何常规的文本编辑器编辑。而本文档的内容主要是描述一些常用 markdown 语法，包括两个方面的内容：1）基本格式语法；2）常用的数学表达式。"><meta property="og:type" content="blog"><meta property="og:title" content="Markdown 语法以及数学表达式总结笔记"><meta property="og:url" content="http://example.com/[object%20Object]/Markdown%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="DataSci/&gt;"><meta property="og:description" content="markdown 是一个轻量级标记语言[^1]，它的名称是为了对应 HTML 中的 Markup 对应的语言，提供了简介快速的语法来实现 Markup 的功能。因此 markdown 兼容了 HTML 的标签，此外还可以直接用任何常规的文本编辑器编辑。而本文档的内容主要是描述一些常用 markdown 语法，包括两个方面的内容：1）基本格式语法；2）常用的数学表达式。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1fykjfe6yoqj30ua0iqtbe.jpg"><meta property="article:published_time" content="2020-08-10T11:02:50.000Z"><meta property="article:modified_time" content="2021-04-11T10:52:57.371Z"><meta property="article:author" content="ZenRay"><meta property="article:tag" content="Note"><meta property="article:tag" content="Markdonw"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1fykjfe6yoqj30ua0iqtbe.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/[object%20Object]/Markdown%E7%AC%94%E8%AE%B0/"},"headline":"DataSci/>","image":["https://tva1.sinaimg.cn/large/006tNbRwgy1fykjfe6yoqj30ua0iqtbe.jpg"],"datePublished":"2020-08-10T11:02:50.000Z","dateModified":"2021-04-11T10:52:57.371Z","author":{"@type":"Person","name":"ZenRay"},"description":"Data Science"}</script><link rel="canonical" href="http://example.com/[object%20Object]/Markdown%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/img/favicon_alpha.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/zenburn.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.1.1"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo_alpha.svg" alt="DataSci/&gt;" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/categories/DataScience">数据科学</a><a class="navbar-item" href="/categories/Paper">论文阅读</a><a class="navbar-item" href="/categories/Note">笔记</a><a class="navbar-item" href="/categories/Trick">技巧</a><a class="navbar-item" href="/categories/Others">其他</a><a class="navbar-item" href="/cagegories/Nonsense">扯淡集</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-08-10T11:02:50.000Z" title="2020-08-10T11:02:50.000Z">2020-08-10</time>发表</span><span class="level-item"><time dateTime="2021-04-11T10:52:57.371Z" title="2021-04-11T10:52:57.371Z">2021-04-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Note/">Note</a></span><span class="level-item">18 分钟读完 (大约2763个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Markdown 语法以及数学表达式总结笔记</h1><div class="content"><p>markdown 是一个轻量级标记语言[^1]，它的名称是为了对应 HTML 中的 Markup 对应的语言，提供了简介快速的语法来实现 Markup 的功能。因此 markdown 兼容了 HTML 的标签，此外还可以直接用任何常规的文本编辑器编辑。而本文档的内容主要是描述一些常用 markdown 语法，包括两个方面的内容：1）基本格式语法；2）常用的数学表达式。</p>
+<a id="more"></a>
+
+<h1 id="1-基本格式语法"><a href="#1-基本格式语法" class="headerlink" title="1. 基本格式语法"></a>1. 基本格式语法</h1><p>在进行常规书写的时候，常用的格式包括 <code>Heading</code>——可以用描述标题内容， 有序和无序列表，斜体，加粗，表格，代码块等格式。</p>
+<h2 id="1-1-Heading"><a href="#1-1-Heading" class="headerlink" title="1.1 Heading"></a>1.1 Heading</h2><p><code>Heading</code> 的标签模式和 HTML 中 <code>&lt;h&gt;</code> 标签具有同样功能。HTML 中通过添加数字来表示 <code>heading</code> 等级，在 markdown 中通过 <code>#</code> 的个数表示同样的功能——例如上面的 <code># 基本格式语法</code> 就是 <code>H1</code> 等级的 <code>heading</code>，而上面的 <code>## Heading</code> 就是 <code>H2</code> 等级的 <code>heading</code>。常见的语法如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># h1 的 heading</span></span><br><span class="line"><span class="section">## h2 的 heading</span></span><br><span class="line"><span class="section">### h3 的 heading</span></span><br><span class="line"><span class="section">#### h4 的 heading</span></span><br><span class="line"><span class="section">##### h5 的 heading</span></span><br><span class="line"><span class="section">###### h6 的 heading</span></span><br></pre></td></tr></table></figure>
+
+<p>示例效果图如下</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1fykjfe6yoqj30ua0iqtbe.jpg" alt="image-20181226225518677"></p>
+<h2 id="1-2-常见文字格式"><a href="#1-2-常见文字格式" class="headerlink" title="1.2 常见文字格式"></a>1.2 常见文字格式</h2><p>常见的文字格式就是分别为斜体、加粗，这两个可以通过添加 <code>*</code> 或者 <code>_</code> 来进行调整文字格式。其中一个 <code>*</code> 或者 <code>_</code> 是将字体变为斜体，添加两个 <code>*</code> 或者 <code>__</code> 可以将字体调整为粗体，下面是语法演示：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="emphasis">*字体变为斜体*</span></span><br><span class="line"><span class="strong">**字体加粗**</span></span><br><span class="line"></span><br><span class="line"><span class="emphasis">_字体变为斜体_</span></span><br><span class="line"><span class="strong">__字体加粗__</span></span><br></pre></td></tr></table></figure>
+
+<p>以上内容得到的效果如下：</p>
+<p><em>字体变为斜体</em><br><strong>字体加粗</strong></p>
+<h2 id="1-3-列表"><a href="#1-3-列表" class="headerlink" title="1.3 列表"></a>1.3 列表</h2><p>列表分为有序列表和无序列表两种形式，其主要的书写方式存在差异。有序列表需要使用<strong>数字</strong>加<strong>点号</strong>及<strong>空格</strong>来表示——<code>1. </code> ；而无序列表可以通过<strong>星号</strong>或者<strong>减号</strong>加<strong>空格</strong>来表示——<code>* </code> 或者 <code>-  </code> 。下面是语法演示：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 第一个有序列表 list</span><br><span class="line"><span class="bullet">2.</span> 第二个有序列表 list</span><br><span class="line"><span class="bullet">3.</span> 第三个有序列表 list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> 第一个无序列表 list</span><br><span class="line"><span class="bullet">*</span> 第二个无序列表 list</span><br><span class="line"><span class="bullet">*</span> 第三个无序列表 list</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一个无序列表 list</span><br><span class="line"><span class="bullet">-</span> 第二个无序列表 list</span><br><span class="line"><span class="bullet">-</span> 第三个无序列表 list</span><br></pre></td></tr></table></figure>
+
+<p>得到的效果如下：</p>
+<ol>
+<li>第一个有序列表 list</li>
+<li>第二个有序列表 list</li>
+<li>第三个有序列表 list</li>
+</ol>
+<ul>
+<li>第一个无序列表 list</li>
+<li>第二个无序列表 list</li>
+<li>第三个无序列表 list</li>
+</ul>
+<h2 id="1-4-表格"><a href="#1-4-表格" class="headerlink" title="1.4 表格"></a>1.4 表格</h2><p>在 markdown 中同样可以插入表格内容，插入的方式如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 第一列 | 第二列 |</span><br><span class="line">| ------ | ------ |</span><br><span class="line">| 内容一 | 内容二 |</span><br></pre></td></tr></table></figure>
+
+<p>得到的小如过下：</p>
+<table>
+<thead>
+<tr>
+<th>第一列</th>
+<th>第二列</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容一</td>
+<td>内容二</td>
+</tr>
+</tbody></table>
+<p>上面的效果是没有进行格式调整，如果需要对内容的对齐方式调整可以通过在第二行中添加冒号（<code>:</code>）来说明对齐方式：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 第一列左对齐 | 第二列居中齐 | 第三列有对齐 |</span><br><span class="line">| :--------- | :--------: | ---------: |</span><br><span class="line">| 内容一      | 内容二      |   内容三    |</span><br></pre></td></tr></table></figure>
+
+<p>下面是得到的效果，分别对第一列进行做对齐，第二列居中对齐和第三列右对齐处理：</p>
+<table>
+<thead>
+<tr>
+<th align="left">第一列左对齐</th>
+<th align="center">第二列居中齐</th>
+<th align="right">第三列有对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">内容一</td>
+<td align="center">内容二</td>
+<td align="right">内容三</td>
+</tr>
+</tbody></table>
+<h2 id="1-5-代码"><a href="#1-5-代码" class="headerlink" title="1.5 代码"></a>1.5 代码</h2><p>代码可以分为行内代码和行间代码，行内的代码可以表示是一个简单的表达式或者语句。如果是需要在行内插入代码可以通过 `` （即<strong>反引号</strong>，一般是 Tab 键上面的那个键或者说是在数字 1 之前那个键），在反引号内书写内容；当需要添加大量的代码块内容时，那么就需要使用三个反引号换行书写内容之后换行添加另三个反引号——注意可以在第一行中添加  <code>&#123;&#125;</code> 以及语言类型来说明是哪种语言的代码，⚠️这点在 Rstudio 中使用 <code>RMD</code> 文件，即 <code>R</code> 的 markdown 文件中尤其重要。演示如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">这个是一个行内的代码 <span class="code">`python [option] filename.py`</span>，下面是一个行间代码块：</span><br><span class="line"></span><br><span class="line">​<span class="code">```&#123;R&#125;</span></span><br><span class="line"><span class="code"># 加载 test.csv 文件为 data.frame</span></span><br><span class="line"><span class="code">df &lt;- read.csv(&quot;./test.csv&quot;)</span></span><br><span class="line"><span class="code">​```</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是一个行内的代码 <code>python [option] filename.py</code>，下面是一个行间代码块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 加载 test.csv 文件为 data.frame</span><br><span class="line">df &lt;- read.csv(&quot;.&#x2F;test.csv&quot;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-数学表达式"><a href="#2-数学表达式" class="headerlink" title="2. 数学表达式"></a>2. 数学表达式</h1><p>数学表达式</p>
+<p>markdown 的数学表达式的书写，是遵循了 <code>Latex</code> 的常用语法格式。但是因为某些网站支持了 markdown 但是并不支持 <code>Latex</code> ，所以看起来文档出现很怪异的现象（例如在 GitHub 上，可能为看见 $$ 等标识符）。</p>
+<h2 id="2-1-单行与多行表达式"><a href="#2-1-单行与多行表达式" class="headerlink" title="2.1 单行与多行表达式"></a>2.1 单行与多行表达式</h2><p>数学表达式分为两类：<strong>单行表达式</strong> 和 <strong>多行表达式</strong>。两者的差异主要在于使用了几个 <code>$</code> 标识符，此外多行表达式每行 <code>\\</code>结尾，每个元素 <code>&amp;</code>分隔。下面演示单行表达式和多行表示：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这个是单行的质能方程 <span class="formula">$E=mc^2$</span>，下面是一个多行的事件概率表示：</span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">p=0, &amp; x=不可能事件 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">0 <span class="tag">\<span class="name">lt</span></span> p <span class="tag">\<span class="name">lt</span></span> 1, &amp; x=随机事件 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">p=1, &amp; x=必然事件<span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是单行的质能方程 $E=mc^2$，下面是一个多行的事件概率表示：<br>$$<br>\begin{cases}<br>p=0, &amp; X=不可能事件 \<br>0 \lt p \lt 1, &amp; X=随机事件 \<br>p=1, &amp; X=必然事件\<br>\end{cases}<br>$$</p>
+<h2 id="2-2-上标和下标"><a href="#2-2-上标和下标" class="headerlink" title="2.2 上标和下标"></a>2.2 上标和下标</h2><p>在书写过程中可能会遇见上标和小标的可能行，上标需要使用 <code>^</code> ，下标需要 <code>_</code> 。如果遇到使用过多内容的上下标处理，那么就需要使用 <code>&#123;&#125;</code> 将所有内容进行包裹，格式如下：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="formula">$f(x)=1/(1+e^&#123;-(b_0+b_1*x)&#125;)$</span></span><br></pre></td></tr></table></figure>
+
+<p>这个是一个 Sigmoid 函数和一元一次函数构成的复合函数 $f(x)=1/(1+e^{-(b_0+b_1*x)})$。</p>
+<p><strong>Note：</strong></p>
+<p>当然 <code>Latex</code> 有更优雅的语法可以使用，例如上面的表达式可以使用<code>\frac&#123;&#125;&#123;&#125;</code> 来表示 $f(x)=\frac{1}{1+e^{-(b_0+b_1*x)}}$。更多的方式，可以查看一下 <code>Latex</code> 语法[^3]</p>
+<h2 id="2-3-其他常见标识符"><a href="#2-3-其他常见标识符" class="headerlink" title="2.3 其他常见标识符"></a>2.3 其他常见标识符</h2><table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">效果</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>$\sum$</code></td>
+<td align="center">$\sum$</td>
+<td>求和</td>
+</tr>
+<tr>
+<td align="center"><code>$\leq$</code></td>
+<td align="center">$\leq$</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\geq$</code></td>
+<td align="center">$\geq$</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\neq$</code></td>
+<td align="center">$\ne$</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\gt$</code></td>
+<td align="center">$\gt$</td>
+<td>大于</td>
+</tr>
+<tr>
+<td align="center"><code>$\lt$</code></td>
+<td align="center">$\lt$</td>
+<td>小于</td>
+</tr>
+<tr>
+<td align="center"><code>$\mu$</code></td>
+<td align="center">$\mu$</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"><code>$\sigma$</code></td>
+<td align="center">$\sigma$</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="2-4-详细其他参考内容"><a href="#2-4-详细其他参考内容" class="headerlink" title="2.4 详细其他参考内容"></a>2.4 详细其他参考内容</h2><h3 id="2-4-1-希腊字符"><a href="#2-4-1-希腊字符" class="headerlink" title="2.4.1 希腊字符"></a>2.4.1 希腊字符</h3><table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>$\alpha$</code></td>
+<td align="center">$\alpha$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Alpha$</code></td>
+<td align="center">$\Alpha$</td>
+</tr>
+<tr>
+<td align="center"><code>$\beta$</code></td>
+<td align="center">$\beta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Beta$</code></td>
+<td align="center">$\Beta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\gamma$</code></td>
+<td align="center">$\gamma$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Gamma$</code></td>
+<td align="center">$\Gamma$</td>
+</tr>
+<tr>
+<td align="center"><code>$\delta$</code></td>
+<td align="center">$\delta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Delta$</code></td>
+<td align="center">$\Delta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\epsilon$</code></td>
+<td align="center">$\epsilon$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Epsilon$</code></td>
+<td align="center">$\Epsilon$</td>
+</tr>
+<tr>
+<td align="center"><code>$\zeta$</code></td>
+<td align="center">$\zeta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Zeta$</code></td>
+<td align="center">$\Zeta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\eta$</code></td>
+<td align="center">$\eta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Eta$</code></td>
+<td align="center">$\Eta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\theta$</code></td>
+<td align="center">$\theta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Theta$</code></td>
+<td align="center">$\Theta$</td>
+</tr>
+<tr>
+<td align="center"><code>$\iota$</code></td>
+<td align="center">$\iota$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Iota$</code></td>
+<td align="center">$\Iota$</td>
+</tr>
+<tr>
+<td align="center"><code>$\kappa$</code></td>
+<td align="center">$\kappa$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Kappa$</code></td>
+<td align="center">$\Kappa$</td>
+</tr>
+<tr>
+<td align="center"><code>$\lambda$</code></td>
+<td align="center">$\lambda$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Lambda$</code></td>
+<td align="center">$\Lambda$</td>
+</tr>
+<tr>
+<td align="center"><code>$\mu$</code></td>
+<td align="center">$\mu$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Mu$</code></td>
+<td align="center">$\Mu$</td>
+</tr>
+<tr>
+<td align="center"><code>$\nu$</code></td>
+<td align="center">$\nu$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Nu$</code></td>
+<td align="center">$\Nu$</td>
+</tr>
+<tr>
+<td align="center"><code>$\xi$</code></td>
+<td align="center">$\xi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Xi$</code></td>
+<td align="center">$\Xi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\omicron$</code></td>
+<td align="center">$\omicron$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Omicron$</code></td>
+<td align="center">$\Omicron$</td>
+</tr>
+<tr>
+<td align="center"><code>$\pi$</code></td>
+<td align="center">$\pi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Pi$</code></td>
+<td align="center">$\Pi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Rho$</code></td>
+<td align="center">$\Rho$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Rho$</code></td>
+<td align="center">$\Rho$</td>
+</tr>
+<tr>
+<td align="center"><code>$\sigma$</code></td>
+<td align="center">$\sigma$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Sigma$</code></td>
+<td align="center">$\Sigma$</td>
+</tr>
+<tr>
+<td align="center"><code>$\tau$</code></td>
+<td align="center">$\tau$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Tau$</code></td>
+<td align="center">$\Tau$</td>
+</tr>
+<tr>
+<td align="center"><code>$\upsilon$</code></td>
+<td align="center">$\upsilon$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Upsilon$</code></td>
+<td align="center">$\Upsilon$</td>
+</tr>
+<tr>
+<td align="center"><code>$\phi$</code></td>
+<td align="center">$\phi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Phi$</code></td>
+<td align="center">$\Phi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\chi$</code></td>
+<td align="center">$\chi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Chi$</code></td>
+<td align="center">$\Chi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\psi$</code></td>
+<td align="center">$\psi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Psi$</code></td>
+<td align="center">$\Psi$</td>
+</tr>
+<tr>
+<td align="center"><code>$\omega$</code></td>
+<td align="center">$\omega$</td>
+</tr>
+<tr>
+<td align="center"><code>$\Omega$</code></td>
+<td align="center">$\Omega$</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-2-集合与比较"><a href="#2-4-2-集合与比较" class="headerlink" title="2.4.2 集合与比较"></a>2.4.2 集合与比较</h3><table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">效果</th>
+<th align="center">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>$\not\subset$</code></td>
+<td align="center">$\not\subset$</td>
+<td align="center">不包含于</td>
+</tr>
+<tr>
+<td align="center"><code>$\subset$</code></td>
+<td align="center">$\subset$</td>
+<td align="center">子集，包含于</td>
+</tr>
+<tr>
+<td align="center"><code>$\supset$</code></td>
+<td align="center">$\supset$</td>
+<td align="center">超集</td>
+</tr>
+<tr>
+<td align="center"><code>$\subseteq$</code></td>
+<td align="center">$\subseteq$</td>
+<td align="center">真子集</td>
+</tr>
+<tr>
+<td align="center"><code>$\subseteq$</code></td>
+<td align="center">$\subseteq$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\emptyset$</code></td>
+<td align="center">$\emptyset$</td>
+<td align="center">空集</td>
+</tr>
+<tr>
+<td align="center"><code>$\in$</code></td>
+<td align="center">$\in$</td>
+<td align="center">属于</td>
+</tr>
+<tr>
+<td align="center"><code>$\notin$</code></td>
+<td align="center">$\notin$</td>
+<td align="center">不属于</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigcup$</code></td>
+<td align="center">$\bigcup$</td>
+<td align="center">并集</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigcap$</code></td>
+<td align="center">$\bigcap$</td>
+<td align="center">交集</td>
+</tr>
+<tr>
+<td align="center"><code>$\mathbb&#123;R&#125;$</code></td>
+<td align="center">$\mathbb{R}$</td>
+<td align="center">实数集</td>
+</tr>
+<tr>
+<td align="center"><code>$\not$</code></td>
+<td align="center">$\not$</td>
+<td align="center">非</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigvee$</code></td>
+<td align="center">$\bigvee$</td>
+<td align="center">逻辑或</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigwedge$</code></td>
+<td align="center">$\bigwedge$</td>
+<td align="center">逻辑与</td>
+</tr>
+<tr>
+<td align="center"><code>$\nleq$</code></td>
+<td align="center">$\nleq$</td>
+<td align="center">不小于等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\ngeq$</code></td>
+<td align="center">$\ngeq$</td>
+<td align="center">不大于等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\approx$</code></td>
+<td align="center">$\approx$</td>
+<td align="center">约等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\equiv$</code></td>
+<td align="center">$\equiv$</td>
+<td align="center">恒等于</td>
+</tr>
+<tr>
+<td align="center"><code>$\infty$</code></td>
+<td align="center">$\infty$</td>
+<td align="center">无穷</td>
+</tr>
+<tr>
+<td align="center"><code>$\sim$</code></td>
+<td align="center">$\sim$</td>
+<td align="center">相关符号，例如正太分布 $X \sim N(\mu,\sigma^2)$</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-3-矩阵"><a href="#2-4-3-矩阵" class="headerlink" title="2.4.3 矩阵"></a>2.4.3 矩阵</h3><p>使用 <code>\begin&#123;matrix&#125;</code>开头及<code>\end&#123;matrix&#125;</code>结尾，每行 <code>\\</code>结尾，每个元素 <code>&amp;</code>分隔。此外向量的表示是 <code>$\vec&#123;&#125;$</code>，例如 $\vec{a}$</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;matrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;matrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;pmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;pmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;bmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;bmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;Bmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;Bmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;vmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;vmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"></span><br><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;Vmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">  1 &amp; 0 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 1 &amp; 0 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">  0 &amp; 0 &amp; 1 <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;Vmatrix&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\begin{matrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{matrix}<br>$$<br>$$<br>\begin{pmatrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{pmatrix}<br>$$<br>$$<br>\begin{bmatrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{bmatrix}<br>$$<br>$$<br>\begin{Bmatrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{Bmatrix}<br>$$<br>$$<br>\begin{vmatrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{vmatrix}<br>$$<br>$$<br>\begin{Vmatrix}<br>1 &amp; 0 &amp; 0 \<br>0 &amp; 1 &amp; 0 \<br>0 &amp; 0 &amp; 1 \<br>\end{Vmatrix}<br>$$</p>
+<h3 id="2-4-4-数学运算符号"><a href="#2-4-4-数学运算符号" class="headerlink" title="2.4.4  数学运算符号"></a>2.4.4  数学运算符号</h3><table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">效果</th>
+<th align="center">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>$\times$</code></td>
+<td align="center">$\times$</td>
+<td align="center">乘法</td>
+</tr>
+<tr>
+<td align="center"><code>$\div$</code></td>
+<td align="center">$\div$</td>
+<td align="center">除法</td>
+</tr>
+<tr>
+<td align="center"><code>$\pm$</code></td>
+<td align="center">$\pm$</td>
+<td align="center">正负号</td>
+</tr>
+<tr>
+<td align="center"><code>$\mp$</code></td>
+<td align="center">$\mp$</td>
+<td align="center">负正号</td>
+</tr>
+<tr>
+<td align="center"><code>$\cdot$</code></td>
+<td align="center">$\cdot$</td>
+<td align="center">点乘</td>
+</tr>
+<tr>
+<td align="center"><code>$\ast$</code></td>
+<td align="center">$\ast$</td>
+<td align="center">星乘</td>
+</tr>
+<tr>
+<td align="center"><code>$\frac&#123;&#125;&#123;&#125;$</code></td>
+<td align="center">$\frac{1}{2}$</td>
+<td align="center">分数表示法</td>
+</tr>
+<tr>
+<td align="center"><code>$\log$</code></td>
+<td align="center">$\log$</td>
+<td align="center">对数运算</td>
+</tr>
+<tr>
+<td align="center"><code>$\ln$</code></td>
+<td align="center">$\ln$</td>
+<td align="center">自然对数运算</td>
+</tr>
+<tr>
+<td align="center"><code>$\sin$</code></td>
+<td align="center">$\sin$</td>
+<td align="center">正弦函数</td>
+</tr>
+<tr>
+<td align="center"><code>$\sum$</code></td>
+<td align="center">$\sum$</td>
+<td align="center">累加</td>
+</tr>
+<tr>
+<td align="center"><code>$\prod$</code></td>
+<td align="center">$\prod$</td>
+<td align="center">累乘</td>
+</tr>
+<tr>
+<td align="center"><code>$\coprod$</code></td>
+<td align="center">$\coprod$</td>
+<td align="center">余积</td>
+</tr>
+<tr>
+<td align="center"><code>$\int$</code></td>
+<td align="center">$\int$</td>
+<td align="center">积分</td>
+</tr>
+<tr>
+<td align="center"><code>$\iint$</code></td>
+<td align="center">$\iint$</td>
+<td align="center">二次积分</td>
+</tr>
+<tr>
+<td align="center"><code>$\oint$</code></td>
+<td align="center">$\oint$</td>
+<td align="center">曲线积分</td>
+</tr>
+<tr>
+<td align="center"><code>$\lim$</code></td>
+<td align="center">$\lim$</td>
+<td align="center">极限</td>
+</tr>
+<tr>
+<td align="center"><code>$\partial$</code></td>
+<td align="center">$\partial$</td>
+<td align="center">导数</td>
+</tr>
+<tr>
+<td align="center"><code>$\nabla$</code></td>
+<td align="center">$\nabla$</td>
+<td align="center">梯度</td>
+</tr>
+<tr>
+<td align="center"><code>$\sqrt$</code></td>
+<td align="center">$\sqrt{ax+b}$</td>
+<td align="center">求平方根</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigotimes$</code></td>
+<td align="center">$\bigotimes$</td>
+<td align="center">克罗内克积</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigoplus$</code></td>
+<td align="center">$\bigoplus$</td>
+<td align="center">异或</td>
+</tr>
+<tr>
+<td align="center"><code>$\bigodot$</code></td>
+<td align="center">$\bigodot$</td>
+<td align="center">加运算</td>
+</tr>
+<tr>
+<td align="center"><code>$\because$</code></td>
+<td align="center">$\because$</td>
+<td align="center">因为</td>
+</tr>
+<tr>
+<td align="center"><code>$\therefore$</code></td>
+<td align="center">$\therefore$</td>
+<td align="center">所以</td>
+</tr>
+<tr>
+<td align="center"><code>$\forall$</code></td>
+<td align="center">$\forall$</td>
+<td align="center">任意</td>
+</tr>
+<tr>
+<td align="center"><code>$\exists$</code></td>
+<td align="center">$\exists$</td>
+<td align="center">存在</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-5-其他类型"><a href="#2-4-5-其他类型" class="headerlink" title="2.4.5 其他类型"></a>2.4.5 其他类型</h3><table>
+<thead>
+<tr>
+<th align="center">代码</th>
+<th align="center">效果</th>
+<th align="center">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>$\ldots$</code></td>
+<td align="center">$\ldots$</td>
+<td align="center">底部省略号</td>
+</tr>
+<tr>
+<td align="center"><code>$\cdots$</code></td>
+<td align="center">$\cdots$</td>
+<td align="center">中部省略号</td>
+</tr>
+<tr>
+<td align="center"><code>$\hat$</code></td>
+<td align="center">$\hat{y}$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\check$</code></td>
+<td align="center">$\check{y}$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\breve$</code></td>
+<td align="center">$\breve{y}$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\circ$</code></td>
+<td align="center">$90^\circ$</td>
+<td align="center">可以用于表示度数</td>
+</tr>
+<tr>
+<td align="center"><code>$\overline$</code></td>
+<td align="center">$\overline{a+b+c}$</td>
+<td align="center">用于表示平均值</td>
+</tr>
+<tr>
+<td align="center"><code>$\underline$</code></td>
+<td align="center">$\underline{a+b}$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\uparrow$</code></td>
+<td align="center">$\uparrow$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\Uparrow$</code></td>
+<td align="center">$\Uparrow$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\backslash$</code></td>
+<td align="center">$\backslash$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\Updownarrow$</code></td>
+<td align="center">$\Updownarrow$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\Rightarrow$</code></td>
+<td align="center">$\Rightarrow$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\Longleftarrow$</code></td>
+<td align="center">$\Longleftarrow$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><code>$\overbrace$</code></td>
+<td align="center">$\overbrace{a + b}$</td>
+<td align="center">上方括号，见下方示例</td>
+</tr>
+<tr>
+<td align="center"><code>$\mid$</code></td>
+<td align="center">$\mid$</td>
+<td align="center">竖线</td>
+</tr>
+<tr>
+<td align="center"><code>$\lbrace \rbrace$</code></td>
+<td align="center">$\lbrace \rbrace$</td>
+<td align="center">花括号</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<ul>
+<li><p><code>$\overbrace&#123;a+\underbrace&#123;b+c&#125;_&#123;1.0&#125;+d&#125;^&#123;2.0&#125;$</code> 结果为 $\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}$</p>
+</li>
+<li><p>上花括弧命令：\overbrace{公式}{说明}</p>
+</li>
+<li><p>下花括弧命令：\underbrace{公式}_{说明}</p>
+<p>例如：<code>$\underbrace&#123;a+\overbrace&#123;b+\dots+b&#125;^&#123;m\mbox&#123; 个&#125;&#125;&#125;_&#123;20\mbox&#123; 个&#125;&#125;$</code>显示为：$\underbrace{a+\overbrace{b+\dots+b}^{m\mbox{ 个}}}_{20\mbox{ 个}}$</p>
+</li>
+</ul>
+<h3 id="2-4-6-特殊格式"><a href="#2-4-6-特殊格式" class="headerlink" title="2.4.6 特殊格式"></a>2.4.6 特殊格式</h3><ol>
+<li><p>堆积符号</p>
+<ul>
+<li><code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code> 基位符号大，上位符号小</li>
+<li><code>&#123;上位公式\atop 下位公式&#125;</code> 上下符号一样大</li>
+<li><code>&#123;上位公式\choose 下位公式&#125;</code> 上下符号一样大；上下符号被包括在圆弧内</li>
+</ul>
+<p>示例 <code>$\vec&#123;x&#125;\stackrel&#123;\mathrm&#123;def&#125;&#125;&#123;=&#125;&#123;x_1,\dots,x_n&#125;\\ &#123;n+1 \choose k&#125;=&#123;n \choose k&#125;+&#123;n \choose k-1&#125;\\ \sum_&#123;k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n&#125;A_&#123;k_0&#125;A_&#123;k_1&#125;\cdots $</code> 结果为 $\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}\ {n+1 \choose k}={n \choose k}+{n \choose k-1}\ \sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</p>
+</li>
+<li><p>定界符</p>
+<p>通过 <code>\big</code> , <code>\Big</code>, <code>\bigg</code>,  <code>\left</code>, <code>\right</code> 等进行控制， 例如 <code>$()\big(\big)\Big(\Big)\bigg(\bigg)\Bigg(\Bigg)$</code>，结果为$()\big(\big)\Big(\Big)\bigg(\bigg)\Bigg(\Bigg)$。此外示例</p>
+<p><code>$\left(x\right) \left(x^&#123;y^&#123;\scriptstyle z&#125;&#125;\right)$</code> 结果为 $\left(x\right) \left(x^{y^{\scriptstyle z}}\right)$</p>
+</li>
+<li><p>占位宽度</p>
+<ul>
+<li><code>\qquad</code> 表示两个 quad 空格 <code>$a \qquad b $</code> 结果显示为：$a \qquad b $</li>
+<li><code>\quad</code> 表示一个 quad 空格 <code>$a \quad b$</code> 结果显示为 $a \quad b$</li>
+<li>一个空格 <code>$a\ b$</code> 表示 1/3m宽度，结果显示为：$a\ b$</li>
+<li><code>;</code> 表示 <code>$a\;b$</code> 占 2/7m宽度，结果显示为：$a;b$</li>
+<li><code>,</code> 表示 1/6m宽度<code>$ a\,b$</code>, 显示为：$ a,b$</li>
+<li>没有占位控制，<code>$ab$</code>, 显示为：$ab$</li>
+<li><code>!</code> 表示紧贴缩进1/6m宽度<code>$a\!b$</code>, 显示为：$a!b$</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note:</strong> 其他格式控制可以参考 <code>\display</code>, <code>\textstyle</code>, <code>\scripstyle</code> </p>
+<h1 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Markdown">Markdown 维基百科</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.markdown.cn/">教程MarkDown</a></p>
+<p> markdown 中文语法详细内容，对应的英文版内容可以参考 <a target="_blank" rel="noopener" href="https://daringfireball.net/projects/markdown/syntax">Daring Fireball: Markdown Syntax Documentation</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://blog.lisp4fun.com/2017/11/01/formula">Markdown 数学公式</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.overleaf.com/learn/latex/Display_style_in_math_mode">Display style in math mode - Overleaf, Online LaTeX Editor</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.authorea.com/users/77723/articles/110898-how-to-write-mathematical-equations-expressions-and-symbols-with-latex-a-cheatsheet">How To Write Mathematical Equations, Expressions, and Symbols with LaTeX: A cheatsheet.</a></p>
+<p> 罗列了怎么书写数据表达式，并且有相关的分类</p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Markdown 语法以及数学表达式总结笔记</p><p><a href="http://example.com/[object%20Object]/Markdown%E7%AC%94%E8%AE%B0/">http://example.com/[object%20Object]/Markdown%E7%AC%94%E8%AE%B0/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>ZenRay</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-08-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-04-11</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Note/">Note</a><a class="link-muted mr-2" rel="tag" href="/tags/Markdonw/">Markdonw</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/%5Bobject%20Object%5D/Hexo%E4%B8%8EGitHub%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Hexo 与 GitHub 搭建静态博客笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/"><span class="level-item">AB测试笔记总计Part1</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-11T05:20:19.000Z">2021-04-11</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90part1/">时间序列分析背景</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/DataScience/">DataScience</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-09T14:45:20.000Z">2021-04-09</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/Ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Ubuntu 服务器环境搭建笔记</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Note/">Note</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-09T14:23:03.000Z">2021-04-09</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part2/">AB测试笔记总计Part2</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-03-23T17:12:26.000Z">2021-03-24</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%E5%88%86%E6%9E%90%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">关联分析及其应用</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-03-15T08:10:45.000Z">2021-03-15</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/">过拟合和欠拟合问题</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/"><span class="level-start"><span class="level-item">DataScience</span></span><span class="level-end"><span class="level-item tag">15</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/DataAnalysis/"><span class="level-start"><span class="level-item">DataAnalysis</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/DataScience/MachineLearning/"><span class="level-start"><span class="level-item">MachineLearning</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/MachineLearning/Statistics/"><span class="level-start"><span class="level-item">Statistics</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/DataScience/Trick/"><span class="level-start"><span class="level-item">Trick</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/Note/"><span class="level-start"><span class="level-item">Note</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Others/"><span class="level-start"><span class="level-item">Others</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Paper/"><span class="level-start"><span class="level-item">Paper</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Trick/"><span class="level-start"><span class="level-item">Trick</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DataAnalysis/"><span class="tag">DataAnalysis</span><span class="tag is-grey-lightest">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPG/"><span class="tag">GPG</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub/"><span class="tag">GitHub</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdonw/"><span class="tag">Markdonw</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Matplotlib/"><span class="tag">Matplotlib</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NLP/"><span class="tag">NLP</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Note/"><span class="tag">Note</span><span class="tag is-grey-lightest">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pandas/"><span class="tag">Pandas</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Paper/"><span class="tag">Paper</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PySpark/"><span class="tag">PySpark</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python/"><span class="tag">Python</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TimeSeries/"><span class="tag">TimeSeries</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ubuntu/"><span class="tag">Ubuntu</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/machinelearning/"><span class="tag">machinelearning</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/paper/"><span class="tag">paper</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%91%84%E5%BD%B1/"><span class="tag">摄影</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E7%A7%91/"><span class="tag">社科</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"><span class="tag">统计学习</span><span class="tag is-grey-lightest">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B4%B9%E5%AD%9D%E9%80%9A/"><span class="tag">费孝通</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/24636410" alt="ZenRay"></figure><p class="title is-size-4 is-block line-height-inherit">ZenRay</p><p class="is-size-6 is-block">Zen</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Cheng Du</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">24</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ZenRay" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github1" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github2" href="https://github.com/RayRi"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/ray_z018/"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#1-基本格式语法"><span class="mr-2">1</span><span>1. 基本格式语法</span></a><ul class="menu-list"><li><a class="is-flex" href="#1-1-Heading"><span class="mr-2">1.1</span><span>1.1 Heading</span></a></li><li><a class="is-flex" href="#1-2-常见文字格式"><span class="mr-2">1.2</span><span>1.2 常见文字格式</span></a></li><li><a class="is-flex" href="#1-3-列表"><span class="mr-2">1.3</span><span>1.3 列表</span></a></li><li><a class="is-flex" href="#1-4-表格"><span class="mr-2">1.4</span><span>1.4 表格</span></a></li><li><a class="is-flex" href="#1-5-代码"><span class="mr-2">1.5</span><span>1.5 代码</span></a></li></ul></li><li><a class="is-flex" href="#2-数学表达式"><span class="mr-2">2</span><span>2. 数学表达式</span></a><ul class="menu-list"><li><a class="is-flex" href="#2-1-单行与多行表达式"><span class="mr-2">2.1</span><span>2.1 单行与多行表达式</span></a></li><li><a class="is-flex" href="#2-2-上标和下标"><span class="mr-2">2.2</span><span>2.2 上标和下标</span></a></li><li><a class="is-flex" href="#2-3-其他常见标识符"><span class="mr-2">2.3</span><span>2.3 其他常见标识符</span></a></li><li><a class="is-flex" href="#2-4-详细其他参考内容"><span class="mr-2">2.4</span><span>2.4 详细其他参考内容</span></a><ul class="menu-list"><li><a class="is-flex" href="#2-4-1-希腊字符"><span class="mr-2">2.4.1</span><span>2.4.1 希腊字符</span></a></li><li><a class="is-flex" href="#2-4-2-集合与比较"><span class="mr-2">2.4.2</span><span>2.4.2 集合与比较</span></a></li><li><a class="is-flex" href="#2-4-3-矩阵"><span class="mr-2">2.4.3</span><span>2.4.3 矩阵</span></a></li><li><a class="is-flex" href="#2-4-4-数学运算符号"><span class="mr-2">2.4.4</span><span>2.4.4  数学运算符号</span></a></li><li><a class="is-flex" href="#2-4-5-其他类型"><span class="mr-2">2.4.5</span><span>2.4.5 其他类型</span></a></li><li><a class="is-flex" href="#2-4-6-特殊格式"><span class="mr-2">2.4.6</span><span>2.4.6 特殊格式</span></a></li></ul></li></ul></li><li><a class="is-flex" href="#3-参考"><span class="mr-2">3</span><span>3. 参考</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo_alpha.svg" alt="DataSci/&gt;" height="28"></a><p class="size-small"><span>&copy; 2021 ZenRay</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

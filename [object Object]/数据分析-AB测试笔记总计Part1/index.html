@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>AB测试笔记总计Part1 - DataSci/&gt;</title><meta description="总结这篇文章，主要在学习 Udacity 数据分析课程中 AB 测试部分遇到了两个方面的问题。其中之一是，课程讲解是将 AB 测试的流程交叉到分析过程、概念讲解等过程中，以致于对 AB 测试的流程没有形成一个完整的体系；另一个问题是，AB 测试中用到的统计学相关知识。在课程中统计学的讲解和公式，表面上是很违背“直觉的”，所以需要一个合适的切入角度去理解 AB 测试中用到的统计学知识。 因此本次根据"><meta property="og:type" content="blog"><meta property="og:title" content="AB测试笔记总计Part1"><meta property="og:url" content="http://example.com/[object%20Object]/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/"><meta property="og:site_name" content="DataSci/&gt;"><meta property="og:description" content="总结这篇文章，主要在学习 Udacity 数据分析课程中 AB 测试部分遇到了两个方面的问题。其中之一是，课程讲解是将 AB 测试的流程交叉到分析过程、概念讲解等过程中，以致于对 AB 测试的流程没有形成一个完整的体系；另一个问题是，AB 测试中用到的统计学相关知识。在课程中统计学的讲解和公式，表面上是很违背“直觉的”，所以需要一个合适的切入角度去理解 AB 测试中用到的统计学知识。 因此本次根据"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2019-12-01T14:13:58.000Z"><meta property="article:modified_time" content="2021-04-11T05:20:41.030Z"><meta property="article:author" content="ZenRay"><meta property="article:tag" content="DataAnalysis"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/[object%20Object]/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/"},"headline":"DataSci/>","image":["http://example.com/img/og_image.png"],"datePublished":"2019-12-01T14:13:58.000Z","dateModified":"2021-04-11T05:20:41.030Z","author":{"@type":"Person","name":"ZenRay"},"description":"Data Science"}</script><link rel="canonical" href="http://example.com/[object%20Object]/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/"><link rel="icon" href="/img/favicon_alpha.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/zenburn.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.1.1"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo_alpha.svg" alt="DataSci/&gt;" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/categories/DataScience">数据科学</a><a class="navbar-item" href="/categories/Paper">论文阅读</a><a class="navbar-item" href="/categories/Note">笔记</a><a class="navbar-item" href="/categories/Trick">技巧</a><a class="navbar-item" href="/categories/Others">其他</a><a class="navbar-item" href="/cagegories/Nonsense">扯淡集</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-12-01T14:13:58.000Z" title="2019-12-01T14:13:58.000Z">2019-12-01</time>发表</span><span class="level-item"><time dateTime="2021-04-11T05:20:41.030Z" title="2021-04-11T05:20:41.030Z">2021-04-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/DataScience/">DataScience</a></span><span class="level-item">1 小时读完 (大约7381个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">AB测试笔记总计Part1</h1><div class="content"><p>总结这篇文章，主要在学习 Udacity 数据分析课程中 AB 测试部分遇到了两个方面的问题。其中之一是，课程讲解是将 AB 测试的流程交叉到分析过程、概念讲解等过程中，以致于对 AB 测试的流程没有形成一个完整的体系；另一个问题是，AB 测试中用到的统计学相关知识。在课程中统计学的讲解和公式，表面上是很违背“直觉的”，所以需要一个合适的切入角度去理解 AB 测试中用到的统计学知识。</p>
+<p>因此本次根据课程内容，网上查阅的相关资料对 AB 测试的流程进行一个梳理。同时在最后将统计学方面中较难理解的部分，进行一个梳理，提供一个可行的切入角度。</p>
+<a id="more"></a>
+<h1 id="1-AB-测试的流程"><a href="#1-AB-测试的流程" class="headerlink" title="1. AB 测试的流程"></a>1. AB 测试的流程</h1><p>在明白 AB 测试的流程之前，需要先从 AB 测试是什么和为什么使用的角度进行说明。简单来说 <strong>AB 测试</strong>就是为了验证在先验条件的存在的情况下，进行新的变更是否合理和可行以达到优化的目的。使用 AB 测试的方式能能够度量变更对某些指标的变化，是变更更具有合理性依据更充分。</p>
+<p>AB 测试也存在 <strong>不适用的场景</strong>：1）对没有明确参照的试验，AB 测试是基于先验条件的优化，如果没有一个参照对比是无法进行测试。2）数据获取时间长，AB 测试一般都是进行小规模快速的试验，所以对于数据获取的单周期较长的试验不太适用。</p>
+<p>对于这类不适用场景情况下，可以采取的<strong>解决方案</strong>：1）通过查询和观察分析日志，进行假设检验，了解用户行为改变原因，使用其他试验方法来完成随机化和试验，进行前瞻性分析。2）其他方法，例如用户体验研究、焦点小组、调查以及人为评价——可以完成深入的定性数据。可以参考<a target="_blank" rel="noopener" href="https://www.udacity.com/api/nodes/3954679115/supplemental_media/additional-techniquespdf/download"> Additional Techniques for Brainstorming and Validating Metrics </a></p>
+<p>对于可以使用 AB 测试的试验，一般流程可以归结为一下几个步骤${^{[1]}}$：</p>
+<ol>
+<li>选择和描述指标</li>
+<li>确认显著性水平（${\alpha\ level}$ ），统计功效（${statistical\ power=1-{\beta}}$），实际显著性水平（${practical\ significance\ level}$）</li>
+<li>计算需要的样本容量</li>
+<li>对试验组和控制组进行分流，运行测试</li>
+<li>分析结果以及得出有效的结论</li>
+</ol>
+<p>下面将从以上五个流程步骤，进行分别梳理。</p>
+<h2 id="1-1-选择和描述指标"><a href="#1-1-选择和描述指标" class="headerlink" title="1.1 选择和描述指标"></a>1.1 选择和描述指标</h2><p>选择合适的指标，需要理解指标 <strong>敏感性</strong> 和 <strong>稳健性</strong> ${^{[2]}}$ 的良好直觉的基础上，通过相应的方式来衡量指标是否可用。在 AB 测试过程中，主要有两类指标：</p>
+<ul>
+<li>不变指标（invariant metrics）：在试验中选取的这样的特征，它能够确认试验组和对照组的容量是否满足相等，而且它不能受到变更的直接明显的影响。它的 <strong>评估方式</strong> 是通过 <strong>完整性检查</strong>（sanity check）来确认是否符合不变指标的要求。一般包括 <strong>总体规模指标</strong> 和 <strong>不会变化的指标</strong>。</li>
+<li>评估指标（evaluation metrics）：在试验中选择的特征，它能够反应出变更效果。总体上来说，它指的是分为 4 个类别的指标：1）计数和合计类指标；2）分布类型指标（例如平均值、中位数以及百分位数等）；3）概率性和比率型指标（probability &amp; rates，例如 CTP 和 CTR）；4）比例型指标，它是指利用两个指标计算出的百分数，合并的一个新指标。</li>
+</ul>
+<p>在建立合适的指标的过程中，需要确认高级业务指标——在针对多团队工作的时候，这样可以统一目标。通常首先应该是简单明确的阐释指标以使指标能够被容易理解；之后对指标细节进行细化，确定如何明确测量指标；再进一步进行数据测量，确认该指标使用方法。对于指标确认还需要注意，对众多指标需要进行相应的评估——因为针对使用目标不同，可能会需要对指标进行调整。当然在团队中的指标使用时，需要注意使用复合指标以避免同一个团队使用不同指标造成的目的分散。复合指标一般被称为目标函数或者 <em>总体评估标准</em>（ OEC 详情见<a target="_blank" rel="noopener" href="http://www.exp-platform.com/Pages/hippo_long.aspx">该文章</a>）。</p>
+<h2 id="1-2-选择显著性水平、统计功效、实际显著性水平-3"><a href="#1-2-选择显著性水平、统计功效、实际显著性水平-3" class="headerlink" title="1.2 选择显著性水平、统计功效、实际显著性水平${^{[3]}}$"></a>1.2 选择显著性水平、统计功效、实际显著性水平${^{[3]}}$</h2><p>在 AB 测试中，通常使用的统计显著性水平为 ${0.05}$，统计功效设置为 ${0.80}$，而实际显著性水平需要根据不同的试验进行设定。这三者一方面在后续中确认试验规模中需要使用；另一方面，需要使用三者进行统计学分析，得出合适的结论。其中实际显著性水平，主要是说明了当检测到变更时，期望多大的变化量才会实施变更——对于这点是基于战略层面以及实际的收益比进行考量。</p>
+<h2 id="1-3-计算试验样本容量"><a href="#1-3-计算试验样本容量" class="headerlink" title="1.3 计算试验样本容量"></a>1.3 计算试验样本容量</h2><p>在分析指标的变异性的时候，可以发现指标选择、分流单元（unit of diversion）的选择以及总体的选择都会影响结果。确认样本容量${^{[4]}}$的时候需要从三者进行考虑：</p>
+<ul>
+<li><p>主体（<code>Subject</code>）：试验中的分流单元说明了试验的主体，即试验中需要用到的测试和比较对象。分流单元主要用的对象${^{[5]}}$是：1）用户 ID；2）匿名 ID，例如 <code>Cookie</code>；3）<code>Event</code>。其他不常用的有设备 ID，IP 等。</p>
+</li>
+<li><p>总体（<code>Population</code>）：这个是为了理解试验中使用的主体来自于合适的总体，保证分流的准确性，也是为了确保试验的有效性。例如，在实际情况下，变更时针对某个国家、某个语言下的变更——具体可以参考 <strong>队列</strong>（<code>Cohort</code>）。</p>
+</li>
+<li><p>保证试验得到快速反馈 因为 AB 测试的特点是快速得到有效的试验反馈，然后要保证试验分析的有效性同时获得良好的显著性分析。因此需要考虑怎么确保使用合适的 ${\alpha}$、${\beta}$ 以及实际显著性的情况下，使用合适样本容量。</p>
+</li>
+</ul>
+<p>在课程中使用了<a target="_blank" rel="noopener" href="http://www.evanmiller.org/ab-testing/sample-size.html">在线计算器</a>，利用确定的参数来确认样本容量。使用工具时请注意以下概念：<strong>基准转换率</strong>（ <code>baseline conversion rate</code> ）—— 指变更之后的预计点击概率；<strong>最低可探测效果</strong>（ <code>minimum detectable effect</code> ）—— 指实际显著性，相当于 ${d_{min}}$ 。最低可探测效果可以选择绝对数值变更和相对数值变更，但是一般选择绝对数值变更；其他参数 ${\alpha}$ 和 ${\beta}$ 根据试验初期确定的值——一般情况下 ${\alpha}$ 一般为 $5%$和 ${\beta}$ 一般设置为 $80%$。</p>
+<h2 id="1-4-试验组和对照组分配及运行试验"><a href="#1-4-试验组和对照组分配及运行试验" class="headerlink" title="1.4 试验组和对照组分配及运行试验"></a>1.4 试验组和对照组分配及运行试验</h2><p>在进行了以上流程之后，需要考虑怎么样运行试验——主要指需要试验持续时间以及试验实施时间两个方面；同时在已经明确了样本容量之后，考虑到需要“抽样”的方式进行多次试验，所以通常把试验样本的容量进行拆分成多次进行试验${^{[6]}}$。这样导致需要结合分配给试验的流量比例和试验样本规模，综合考虑试验 <strong>持续时间</strong>（Duration），<strong>曝光时机</strong>（Exposure）以及 <strong>学习效应</strong>（Learning Effect）${^{[7]}}$。</p>
+<h2 id="1-5-分析试验结果得出有效结论"><a href="#1-5-分析试验结果得出有效结论" class="headerlink" title="1.5 分析试验结果得出有效结论"></a>1.5 分析试验结果得出有效结论</h2><p>AB 测试的目的就是为了验证变更是否可行，但是在试验过程中可能收到多种因素的影响都可能导致结果不可信，因此需要去验证试验的数据是否可信。在分析结果的过程，包括以下内容：</p>
+<ul>
+<li><p>完整性检查（<code>Sanity check</code>）</p>
+<p>  在完整性检查是通过验证 <strong>不变指标</strong> 在试验中是否发生了变化。完整性检查是第一步，如果无法通过完整性检查，那么就不能继续进行统计分析。需要检查失败原因，以便后续进行试验以及提供经验教训。一般分析原因，可能用到回顾性分析和分析学习效应影响</p>
+</li>
+<li><p>分析数据</p>
+<p>  进行参数型统计分析，就是检验是否有否具有显著性差异。对单一评估指标进行分析，有助于了解试验中存在的问题（例如设计是否合理）以及了解用户对变更的反应。完成参数性统计分析之后，需要从非参数型分析的方法进行总体分析。需要 <strong>注意</strong>：当面对参数型假设检验和非参数型符号检验结论冲突时，可以检查数据是否存在辛普森悖论（Simpson’s Paradox）——一般发生这种情况可能的原因：1）试验设置不正确；2）变更在新用户和老用户之间存在差异。</p>
+<p>  对多评估指标分析，需要注意实际非显著性的指标被当作显著性——导致存在这个问题的原因是非相关的多个指标增加了最后结论的显著性${^{[8]}}$。针对这类显著性被放大的解决方法：1）<code>Bootstrap</code>；2）<code>Bonferroni Correction</code>，它是将显著性水平除以指标个数，以降低单个指标的显著性水平。但是该方法可能导致分析结果过于保守——对相关性指标不建议使用；3）控制 <code>Familysise Error Rate</code> (FWER)；4）控制 <code>False Discovery Rate</code>(FDR)。注意：在实际分析中可能指标之间的显著性方向不一样——例如，在试验假设中期望是 DAU 和 用户在线时间都增加，但是实际分析可能是 DAU 减少了而用户在线时间增加。对于这类问题，一般是通过设置总体评估标准（即 OEC，Overall Evaluation Criterion），但是 OEC 是帮助理解商业目标以及平衡指标的时间和点击问题，但是它并不能帮助做出变更决定。</p>
+<p>  在完成以上的统计显著性分析之后，需要通过实际显著性分析来确认变更的实际影响以及实际可实施的可能性。最后得出有效结论需要从理解变更，变更的影响以及产生结果的原因等方面着手阐释，并最后得出是否可以执行变更的结论。</p>
+</li>
+</ul>
+<h2 id="1-6-其他需要思考的角度"><a href="#1-6-其他需要思考的角度" class="headerlink" title="1.6 其他需要思考的角度"></a>1.6 其他需要思考的角度</h2><p>试验中涉及的伦理问题都是影响试验的重要因素，在试验设计初期需要考虑。</p>
+<h2 id="1-6-1-试验设计中的伦理考虑"><a href="#1-6-1-试验设计中的伦理考虑" class="headerlink" title="1.6.1 试验设计中的伦理考虑"></a>1.6.1 试验设计中的伦理考虑</h2><p>AB 测试的伦理包括AB测试中的道德规范、如何保护用户。在进行伦理分析的时候，需要从以下几个原则进行分析：风险（ Risk ）、益处（ Benefit ）、选择（ choice ）、隐私（ Privacy ）</p>
+<ol>
+<li><p>风险：试验参与者会承受那些风险</p>
+<blockquote>
+<p>主要界限在于风险是否超过了“最低风险”。 最低风险的定义为参与者在日常生活中会遇到的伤害的概率和程度，包括身体、心理、情感、社会和经济方面。 如果风险超过最低风险，那就需要获得知情同意。我们将在后面讨论知情同意。<br>在大多数（并非全部）在线实验中，这些实验是否会导致超过最低风险的伤害是非常有争议的。 如果我们改变某个教育网站的课程排名，或更改某个在线游戏的用户界面，参与者会暴露在什么风险之下呢？与健康或财务相关的网站或应用程序当然除外。 比如，在 Facebook 的实验中，参与者是否真的暴露在超过最低风险的伤害之下是有争议的： 显示的所有内容无论如何都会进入他们的信息流，问题就在于删掉一些文章是否会增加风险。</p>
+</blockquote>
+</li>
+<li><p>益处：试验结果可能会产生哪些好处</p>
+<blockquote>
+<p>即使风险很小，但是研究结果有什么意义呢？大多数 A/B 测试的益处在于改进产品。 在其他社会科学中，在于理解人的境况以提供帮助，比如教育和发展。医学界的测试风险往往较高，但却能带来健康状况的改善。<br><strong>能够说明完成研究的益处是非常重要的。</strong></p>
+</blockquote>
+</li>
+<li><p>选择：试验参与者是否还有其他选择</p>
+<blockquote>
+<p>要测试一个搜索引擎的变化，参与者始终可以选择使用其他搜索引擎。 主要问题在于参与者的选择越少，强制性以及参与者是否能选择参与与否的问题就越多，以及这些问题如何在风险和益处之间实现平衡。</p>
+</blockquote>
+<blockquote>
+<p>例如，医学临床试验要测试治疗癌症的新药，鉴于大多数参与者面临的另一个主要选择是死亡，那么在知情同意的情况下，参与者的风险还是很高的。</p>
+</blockquote>
+<blockquote>
+<p>对于在线实验，需要考虑的问题是用户可以使用的其他服务有哪些，以及转换服务的成本是多少，包括时间、金钱、信息等。</p>
+</blockquote>
+</li>
+<li><p>隐私或数据敏感性：试验参与者期待怎样的隐私保护</p>
+<blockquote>
+<p>针对收集到的数据内容，包括隐私和保密性的期望，这包括了以下几个方面的内容：1）参与者是否了解哪些数据被收集了；2）公开这些数据是否会带来伤害；3）参与者是否期望相关数据被当作隐私和保密信息</p>
+</blockquote>
+</li>
+</ol>
+<p>当然针对现有公共环境中的试验或者数据获取于公共数据，那也就不涉及保密性的问题。另一方面如果由收集了新的数据，那么又需要考虑相关问题：</p>
+<ul>
+<li>收集了哪些数据？敏感性如何？是否包括财务和健康数据？</li>
+<li>收集的数据是否会与个人联系起来，也就是说是否具有个人可识别性？</li>
+<li>数据是如何处理的，采取了什么安全措施？参与者可以期望什么样的保密级别？</li>
+<li>数据公之于众后会对个人带来什么伤害，包括健康、心理、情绪、社会和财务方面？ 例如很多时候，从观察到的“公共”行为、调查和采访中收集的数据，如果数据没有个人可识别性，则被视为不需要 IRB 审查（参考： NSF 常见问题解答）</li>
+</ul>
+<p>总体来说，在进行试验数据采集时，需要注意到以下问题：</p>
+<ul>
+<li>对于新收集和存储的数据，数据的敏感性如何？处理数据时采取了什么内部防御措施？例如设置了何种访问控制？如何捕捉和管理违反该防御措施的行为等？</li>
+<li>然后，如何使用收集的数据？如何保护参与者的数据？如何向参与者保证为了此研究而向他们收集的数据不会被用于其他目的？随着数据敏感性的增强，这一点越来越重要。</li>
+<li>最后，哪些数据会更加广泛地公开，是否会给参与者带来任何额外风险？</li>
+</ul>
+<p>大多数研究，由于在线服务的性质，往往风险较小，问题多在于可识别性、隐私、机密/安全性方面的数据收集。 因此，由公司外的中立第三方来做这些决定或许要好过于结果中存在既得利益的人。 在线研究的一个越来越大的风险在于偏见及歧视的可能性，如阶梯计价以及对于特定人群来说这算不算歧视。关于数据收集的内部审核：</p>
+<ul>
+<li>参与者面临的风险是否降到了最低？</li>
+<li>参与者了解收集的数据是什么吗？</li>
+<li>这些数据具有可识别性吗？</li>
+<li>如何处理数据？</li>
+</ul>
+<p>内部审核流程建立：</p>
+<ol>
+<li>参与 A/B 测试的每名员工应接受伦理和参与者保护方面的教育。 很明显除了我们谈到的诚信、胜任能力和责任外，还有其他伦理方面，而且往往比保护 A/B 测试的参与者更加广泛（引自美国计算机协会 (ACM) 道德规范)。</li>
+<li>所有数据，无论是否具有可识别性，都应安全存储，仅向需要这些数据来完成工作的人提供访问权限，且应该对访问限时。 应针对哪些数据使用是可接受的和不可接受的制定政策。而且，所有数据使用均应记录在案和定期审计，以确保未违反规定。</li>
+<li>对于可能存在超过最低风险或数据敏感性问题的处理，应制定明确的上报流程。</li>
+</ol>
+<h1 id="2-AB-测试中统计学内容"><a href="#2-AB-测试中统计学内容" class="headerlink" title="2. AB 测试中统计学内容"></a>2. AB 测试中统计学内容</h1><p>首先需要明确一点，在课程中 AB 测试使用的统计学显著性检验方法为 <strong>${z}$ 检验</strong> ${^{[9]}}$。课程中用到的统计学内容的步骤：1）试验过程中显著性分析；2）试验结论显著性分析过程；3）非参数型的符号检验，进行展开解释。</p>
+<h2 id="2-1-试验过程中显著性分析——完整性检查"><a href="#2-1-试验过程中显著性分析——完整性检查" class="headerlink" title="2.1 试验过程中显著性分析——完整性检查"></a>2.1 试验过程中显著性分析——完整性检查</h2><p>完整性检查是利用不变指标来检查试验是否有效的过程。首先在进行流量分流到试验组和对照组对象的过程中，是随机分配到两者中（即 ${0.5}$ 的概率）——这里符合一个 <strong>二项分布</strong> 的特征。因此只需要分析对照组或试验组是否满足这个二项分布的置信区间，相应的计算公式如下：</p>
+<ul>
+<li><strong>期望</strong>：${E=n*p}$</li>
+<li><strong>标准偏差</strong>：<code>Standard Deviation</code>，${SD=\sqrt{n<em>p</em>(1-p)}}$</li>
+<li><strong>标准差</strong>：<code>Standart Error</code>, ${SE=\frac{SD}{n}=\sqrt{\frac{p*(1-p)}{n}}}$</li>
+<li><strong>边际值</strong>：<code>Margin</code>，${margin=SE<em>z^</em>}$</li>
+<li><strong>置信区间</strong>：<code>Confidence Interval</code>，${CI\in[p-margin,\ p+margin]}$</li>
+<li>实际概率：指对照组或控制组占总体的比例（这里仅对控制组作计算），${p^*=\frac{n_{contr}}{n}}$</li>
+</ul>
+<p>以上公式中，${n}$ 指 ${n_{total}}$，为试验组和对照组的样本容量求和 ${n_{total}=n_{contr}+n_{exp}}$；${z^*}$ 指的是在置信水平 ${\alpha}$ 的条件下得到的 ${z_{score}}$。</p>
+<p>检查过程中需要分别计算每个不变指标的值，比较某个指标 ${p^*}$ 是否在该指标的置信区间 ${CI}$ 中，如果满足要求那么说明该指标通过了完整性检查。在实际中，可以通过另一种方式来计算——${p_{exp}}$ 与 ${CI_{contr}\in[p_{contr}-margin_{contr}, \ p_{contr}+margin_{contr}]}$ 比较的方式（实际中可以利用 ${p_{contr}}$ 和 与试验组进行比较）。以对照组的计算方式如下：</p>
+<ul>
+<li><strong>概率</strong>：${p_{exp}=\frac{x_{exp}}{n_{exp}}}$，${p_{contr}=\frac{x_{contr}}{n_{contr}}}$</li>
+<li><strong>标准差</strong>：<code>Standart Error</code>, ${SE_{contr}=\sqrt{\frac{p_{contr}*(1-p_{contr})}{n_{contr}}}}$</li>
+<li><strong>边际值</strong>：<code>Margin</code>，${margin_{contr}=SE_{contr}<em>z^</em>}$</li>
+<li><strong>置信区间</strong>：<code>Confidence Interval</code>，${CI\in[p_{contr}-margin_{contr},\ p_{contr}+margin_{contr}]}$</li>
+</ul>
+<p>通过这种方式进行分析完整性检验，如果 ${p_{exp}}$ 在 ${CI}$ 中那么就通过了完整性检验，否者即不能通过完整性检验。</p>
+<h2 id="2-2-试验显著性分析过程——显著性分析（效应分析）"><a href="#2-2-试验显著性分析过程——显著性分析（效应分析）" class="headerlink" title="2.2 试验显著性分析过程——显著性分析（效应分析）"></a>2.2 试验显著性分析过程——显著性分析（效应分析）</h2><p>在进行显著分析之前，需要分析指标的分组单元和分析单元是否一致${^{[10]}}$——当两者一致时说明分析方差和实证方差匹配。显著性分析主要包括统计学显著性分析和实际显著性分析，下面对两者分别说明：</p>
+<ul>
+<li><p>统计显著性 <code>Statistics Significance</code></p>
+<p>统计显著性分析是针对评估指标的分析，为了检验试验组和对照组中产生了差异性。在试验中，零和假设为试验组和对照组之间概率没有差异性即 ${\hat{d}=\hat{p}<em>{exp}-\hat{p}</em>{contr}=0}$；备选假设两者概率存在差异。如果利用差异值 ${\hat{d}}$ 计算相应的置信区间，假设区间内不包括 ${0}$，说明两者具有统计显著性，那么就可以拒绝接受零和假设；反之，则不可以拒绝零和假设。分析过程是基于双样本差异分析，具体过程如下：</p>
+<ul>
+<li><strong>差异值</strong>：<code>Difference</code>, ${\hat{d}=\hat{p}<em>{exp}-\hat{p}</em>{contr}}$</li>
+<li><strong>合并概率</strong>：<code>Pool Probability</code> 指试验组和对照组中发生发生占总体的概率 ${p_{pool}=\frac{x_{cont}+x_{exp}}{n_{contr}+n_{exp}}}$</li>
+<li><strong>合并标准差</strong>：<code>Pool Standard Error</code>，一般合并方差的计算使用合并标准偏差来计算，公式是 ${SE_{pool}=\sqrt{SD_{pool}^2/n_{contr}+SD_{pool}^2/n_{exp}}}$，该公式中 ${SD_{pool}=\sqrt{p_{pool}*(1-p_{pool})}}$</li>
+<li><strong>边际值</strong>: <code>Margin</code>，${margin=SE_{pool}<em>z^</em>}$</li>
+<li><strong>置信区间</strong>：<code>Confidence Interval</code>，${CI\in[\hat{d}-margin,\ \hat{d}+margin]}$</li>
+</ul>
+</li>
+<li><p>实际显著性 <code>Practical Significance</code></p>
+<p>  在完成统计显著性分析之后，才能进行实际显著性分析——也就是说一般分析的时候，统计显著性是实际显著性的基础条件。而实际显著性分析比较简单，一般指需要通过比较设定的 ${d_{min}}$ 值与统计显著性的置信区间——如果在在置信区间内，那么说明拒绝实际显著性假设；反之，则说明具有实际显著性。</p>
+</li>
+</ul>
+<h2 id="2-3-符号检验——非参数型检验方法"><a href="#2-3-符号检验——非参数型检验方法" class="headerlink" title="2.3 符号检验——非参数型检验方法"></a>2.3 符号检验——非参数型检验方法</h2><p>符号检验（即 <code>Sign Test</code>）,主要依据的是假设了试验成功的概率是 50% ，同时根据试验是一个二项式分布的试验。以此条件计算出概率，如果计算出的概率（ ${p_{value}}$ ）小于假设的 ${p_{critical}}$ 值，那么就是统计学显著。计算概率的方式可以使用<a target="_blank" rel="noopener" href="http://graphpad.com/quickcalcs/binomial1.cfm">在线计算工具</a>。</p>
+<h1 id="3-参考"><a href="#3-参考" class="headerlink" title="3. 参考"></a>3. 参考</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/a-summary-of-udacity-a-b-testing-course-9ecc32dedbb1">A Summary of Udacity A/B Testing Course </a></p>
+</li>
+<li><p><strong>敏感性</strong> 和 <strong>稳健性</strong>：即 sensitivity 以及 robustness，他们用于评价指标是否可用的一个参考。一般可以通过以下方式进行测量：i)使用 AA 测试；ii）回顾性分析（retrospective analysis）。一般来说这两者是逆相关，所以对于两者需要一个合适的平衡</p>
+</li>
+<li><p>三者统计学解释，可以参考 <a target="_blank" rel="noopener" href="http://www.appadhoc.com/blog/alpha-beta-statics-ab-test/">${\alpha}$ 和 ${\beta}$</a>，以及<a target="_blank" rel="noopener" href="http://songchunlin.net/cn/2014/04/statistical-power/">如何理解统计学中的 Power </a>：</p>
+<ul>
+<li><p><strong>显著性水平</strong>：在统计学假设试验中，${\alpha}$ 表示了在零和假设 ${H_0}$ 是真的情况下，发生拒绝 ${H_0}$ 的概率；是判断发生 ${Type\ Error\ I}$ (即 ${P_{reject\ null\ hypothesis|true\ null\ hypothesis}}$) 的概率。通过 ${\alpha}$ 可以计算出置信水平（ ${Confidence\ Level=1-\alpha}$ ）</p>
+</li>
+<li><p><strong>统计功效</strong>：其统计学定义是零和假设 ${H_0}$ 错误的情况下，成功拒绝 ${H_0}$ 的概率（即 ${P_{reject\ null\ hypothesis|false\ null\ hypothesis}}$）。这里涉及到另一个术语 ${\beta}$，它和统计功效的关系是 ${\beta=1-statistics\ power}$，是判断发生 ${Type\ Error\ II}$ (即 ${P_{not\ reject\ null\ hypothesis|false\ null\ hypothesis}}$) 的概率</p>
+</li>
+<li><p><strong>实际显著性</strong>：在 AB 测试中，该显著性主要是基于商业角度等方面考量，用于判断在变更带来多大的变化量的时候可以实施变更。一般是试验结合实际，进行设定的 ${d_{min}}$</p>
+</li>
+</ul>
+</li>
+<li><p>样本容量对统计学分析的时候，对显著性分析，统计功效的影响可以参见可视化模型<a target="_blank" rel="noopener" href="http://rpsychologist.com/d3/NHST/">Understanding Statistical Power and Significance Testing </a></p>
+</li>
+<li><p>对三种常用的分流对象来说，需要从三个角度去考量：1）作引流单元是否影响用户体验一致性；2）变更是否明显直接呈现在用户面前，例如后端服务器变化；3）分析评估中是否需要考虑用户行为作为分析角度。对于三个角度都是否定的角度，那么可以参考使用 <code>event</code> 来分流——例如服务器变化测量视频加载时间变更</p>
+</li>
+<li><p>一般情况下，很少使用单次周期的试验，通常都是使用多周期的试验。这样的好处是当面对 <code>学习效应（learning effect）</code> 的时候，试验能够安全得到有效的数据；同时从商业角度考量，对于新功能测试一般都不太希望得到竞争对手的干扰以及市场关注；同时也是为了避免测试样本容量全部不暴露在某个集中的时间短，造成数据不能得到有效数据，例如：节假日期间流量；另一方面，是体现该方法的优势——当进行多个试验任务时或针对相同功能展开的多个试验任务，如针对不同任务设置不同水平参数、相同功能的不同类型的试验，针对这类试验能够方便地进行纵向对比增加试验结论可信性</p>
+</li>
+<li><p><strong>学习效应</strong>：即 <code>Learning Effect</code>，指的是当对新的变更时，因为用户差异以及用户需要花费成本去学习新的变化而导致初期表现出结果波动较大；随着时间的变化，用户行为才可能稳定</p>
+</li>
+<li><p>该原因的统计学解释，如下：</p>
+<p>${P_{one\ significant\ result}=1-P_{non\ significant\ results}}$，其中 ${P_{non\ significant\ results}}$ 的计算需要结合指标个数： ${P_{non\ significant\ results}=(1-\alpha)^n}$ ，其中 ${n}$ 为指标个数。</p>
+</li>
+<li><p>这里的基础条件：首先在试验中使用到的总体（Population）是足够大，同时进行分析的样本容量（Sample Size）都是大于 30（因为一般的 ${t}$ 检验的是适用于样本容量较小的试验）。因为样本容量足够大，这里可以假设通过样本几乎可以估计出总体的参数。</p>
+</li>
+<li><p><strong>分析单元</strong>：它只是在分析某些指标时用到的 <strong>分母</strong>，是分析过程中需要确认每次的事件是否独立。例如：计算点击率指标时，用点击量除以页面查看量，其中分母页面查看量，即是分析单元。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://rpubs.com/Shaahin/ab-test-udacity">RPubs - A/B Testing - Udacity Course Final Project</a> 这里是别人对 AB 测试的流程分析，实现的方式是使用了 R 语言</p>
+</li>
+</ol>
+</div><div class="article-licensing box"><div class="licensing-title"><p>AB测试笔记总计Part1</p><p><a href="http://example.com/[object%20Object]/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/">http://example.com/[object%20Object]/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part1/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>ZenRay</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-12-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-04-11</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="" rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags size-small mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/DataAnalysis/">DataAnalysis</a></div><div class="notification is-danger">You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.</div></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/%5Bobject%20Object%5D/Markdown%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Markdown 语法以及数学表达式总结笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/%5Bobject%20Object%5D/Python-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%8A%80%E5%B7%A7/"><span class="level-item">Python 数据处理技巧</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-11T05:20:19.000Z">2021-04-11</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90part1/">时间序列分析背景</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/DataScience/">DataScience</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-09T14:45:20.000Z">2021-04-09</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/Ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Ubuntu 服务器环境搭建笔记</a></p><p class="is-uppercase"><a class="link-muted" href="/categories/Note/">Note</a></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-04-09T14:23:03.000Z">2021-04-09</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-AB%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0%E6%80%BB%E8%AE%A1Part2/">AB测试笔记总计Part2</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-03-23T17:12:26.000Z">2021-03-24</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90-%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%E5%88%86%E6%9E%90%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">关联分析及其应用</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2021-03-15T08:10:45.000Z">2021-03-15</time></p><p class="title is-6"><a class="link-muted" href="/%5Bobject%20Object%5D/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E9%97%AE%E9%A2%98/">过拟合和欠拟合问题</a></p><p class="is-uppercase"></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/"><span class="level-start"><span class="level-item">DataScience</span></span><span class="level-end"><span class="level-item tag">15</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/DataAnalysis/"><span class="level-start"><span class="level-item">DataAnalysis</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/DataScience/MachineLearning/"><span class="level-start"><span class="level-item">MachineLearning</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/DataScience/MachineLearning/Statistics/"><span class="level-start"><span class="level-item">Statistics</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/DataScience/Trick/"><span class="level-start"><span class="level-item">Trick</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile is-marginless" href="/categories/Note/"><span class="level-start"><span class="level-item">Note</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Others/"><span class="level-start"><span class="level-item">Others</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Paper/"><span class="level-start"><span class="level-item">Paper</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Trick/"><span class="level-start"><span class="level-item">Trick</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/DataAnalysis/"><span class="tag">DataAnalysis</span><span class="tag is-grey-lightest">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GPG/"><span class="tag">GPG</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub/"><span class="tag">GitHub</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Markdonw/"><span class="tag">Markdonw</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Matplotlib/"><span class="tag">Matplotlib</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/NLP/"><span class="tag">NLP</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Note/"><span class="tag">Note</span><span class="tag is-grey-lightest">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Pandas/"><span class="tag">Pandas</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Paper/"><span class="tag">Paper</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PySpark/"><span class="tag">PySpark</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Python/"><span class="tag">Python</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TimeSeries/"><span class="tag">TimeSeries</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ubuntu/"><span class="tag">Ubuntu</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/machinelearning/"><span class="tag">machinelearning</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag is-grey-lightest">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/paper/"><span class="tag">paper</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/python/"><span class="tag">python</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%91%84%E5%BD%B1/"><span class="tag">摄影</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%A4%BE%E7%A7%91/"><span class="tag">社科</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0/"><span class="tag">统计学习</span><span class="tag is-grey-lightest">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B4%B9%E5%AD%9D%E9%80%9A/"><span class="tag">费孝通</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://avatars.githubusercontent.com/u/24636410" alt="ZenRay"></figure><p class="title is-size-4 is-block line-height-inherit">ZenRay</p><p class="is-size-6 is-block">Zen</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Cheng Du</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">49</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">24</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ZenRay" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github1" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github2" href="https://github.com/RayRi"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Instagram" href="https://www.instagram.com/ray_z018/"><i class="fab fa-instagram"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><div class="card widget" id="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex" href="#1-AB-测试的流程"><span class="mr-2">1</span><span>1. AB 测试的流程</span></a><ul class="menu-list"><li><a class="is-flex" href="#1-1-选择和描述指标"><span class="mr-2">1.1</span><span>1.1 选择和描述指标</span></a></li><li><a class="is-flex" href="#1-2-选择显著性水平、统计功效、实际显著性水平-3"><span class="mr-2">1.2</span><span>1.2 选择显著性水平、统计功效、实际显著性水平${^{[3]}}$</span></a></li><li><a class="is-flex" href="#1-3-计算试验样本容量"><span class="mr-2">1.3</span><span>1.3 计算试验样本容量</span></a></li><li><a class="is-flex" href="#1-4-试验组和对照组分配及运行试验"><span class="mr-2">1.4</span><span>1.4 试验组和对照组分配及运行试验</span></a></li><li><a class="is-flex" href="#1-5-分析试验结果得出有效结论"><span class="mr-2">1.5</span><span>1.5 分析试验结果得出有效结论</span></a></li><li><a class="is-flex" href="#1-6-其他需要思考的角度"><span class="mr-2">1.6</span><span>1.6 其他需要思考的角度</span></a></li><li><a class="is-flex" href="#1-6-1-试验设计中的伦理考虑"><span class="mr-2">1.7</span><span>1.6.1 试验设计中的伦理考虑</span></a></li></ul></li><li><a class="is-flex" href="#2-AB-测试中统计学内容"><span class="mr-2">2</span><span>2. AB 测试中统计学内容</span></a><ul class="menu-list"><li><a class="is-flex" href="#2-1-试验过程中显著性分析——完整性检查"><span class="mr-2">2.1</span><span>2.1 试验过程中显著性分析——完整性检查</span></a></li><li><a class="is-flex" href="#2-2-试验显著性分析过程——显著性分析（效应分析）"><span class="mr-2">2.2</span><span>2.2 试验显著性分析过程——显著性分析（效应分析）</span></a></li><li><a class="is-flex" href="#2-3-符号检验——非参数型检验方法"><span class="mr-2">2.3</span><span>2.3 符号检验——非参数型检验方法</span></a></li></ul></li><li><a class="is-flex" href="#3-参考"><span class="mr-2">3</span><span>3. 参考</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo_alpha.svg" alt="DataSci/&gt;" height="28"></a><p class="size-small"><span>&copy; 2021 ZenRay</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ZenRay"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mhchem.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
